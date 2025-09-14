@@ -1,18 +1,7 @@
 from flask import Flask, jsonify
-import psycopg2
 import os
 
 app = Flask(__name__)
-
-# --- Database connection helper ---
-def get_db_connection():
-    return psycopg2.connect(
-        host="localhost",      # Change if your DB is remote
-        port=5432,
-        database="testdb",
-        user="postgres",
-        password="Steph420!"   # Replace with env var in production
-    )
 
 # --- Routes ---
 @app.route('/')
@@ -21,23 +10,23 @@ def home():
 
 @app.route('/people')
 def get_people():
-    conn = get_db_connection()
-    cur = conn.cursor()
-    cur.execute("SELECT id, name FROM people;")
-    rows = cur.fetchall()
-    cur.close()
-    conn.close()
-    return jsonify([{"id": r[0], "name": r[1]} for r in rows])
+    # Sample data instead of DB query
+    sample_people = [
+        {"id": 1, "name": "Alice"},
+        {"id": 2, "name": "Bob"},
+        {"id": 3, "name": "Charlie"}
+    ]
+    return jsonify(sample_people)
 
 @app.route('/data')
 def get_data():
-    conn = get_db_connection()
-    cur = conn.cursor()
-    cur.execute("SELECT id, name FROM people;")
-    rows = cur.fetchall()
-    cur.close()
-    conn.close()
-    return jsonify({"data": [{"id": r[0], "name": r[1]} for r in rows]})
+    # Same sample data, wrapped in a "data" key
+    sample_people = [
+        {"id": 1, "name": "Alice"},
+        {"id": 2, "name": "Bob"},
+        {"id": 3, "name": "Charlie"}
+    ]
+    return jsonify({"data": sample_people})
 
 # --- Entry point ---
 if __name__ == "__main__":
