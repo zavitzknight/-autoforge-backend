@@ -1,6 +1,6 @@
 from flask import Flask, jsonify
 import psycopg2
-
+    import os
 app = Flask(__name__)
 
 def get_db_connection():
@@ -23,6 +23,6 @@ def get_people():
     return jsonify([{"id": r[0], "name": r[1]} for r in rows])
 
 if __name__ == "__main__":
-    import os
+
 port = int(os.environ.get("PORT", 5000))
 app.run(host="0.0.0.0", port=port)
