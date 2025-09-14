@@ -3,14 +3,12 @@ import os
 
 app = Flask(__name__)
 
-# --- Routes ---
 @app.route('/')
 def home():
     return "✅ API is running"
 
 @app.route('/people')
 def get_people():
-    # Sample data instead of DB query
     sample_people = [
         {"id": 1, "name": "Alice"},
         {"id": 2, "name": "Bob"},
@@ -20,7 +18,6 @@ def get_people():
 
 @app.route('/data')
 def get_data():
-    # Same sample data, wrapped in a "data" key
     sample_people = [
         {"id": 1, "name": "Alice"},
         {"id": 2, "name": "Bob"},
@@ -28,7 +25,6 @@ def get_data():
     ]
     return jsonify({"data": sample_people})
 
-# --- Entry point ---
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 5000))
     app.run(host="0.0.0.0", port=port)
