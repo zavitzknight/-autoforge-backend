@@ -3,5 +3,5 @@ services:
     name: autoforge-backend
     env: python
     buildCommand: ""
-    startCommand: "python app.py"
+    startCommand: "startCommand: "gunicorn app:app""
     plan: free
