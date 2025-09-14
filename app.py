@@ -1,6 +1,6 @@
 from flask import Flask, jsonify
 import psycopg2
-    import os
+import os
 app = Flask(__name__)
 
 def get_db_connection():
