@@ -24,5 +24,15 @@ def get_people():
 
 if __name__ == "__main__":
 
+@app.route('/data')
+def get_data():
+    conn = get_db_connection()
+    cur = conn.cursor()
+    cur.execute("SELECT id, name FROM people;")
+    rows = cur.fetchall()
+    cur.close()
+    conn.close()
+    return jsonify([{"id": r[0], "name": r[1]} for r in rows])
+
 port = int(os.environ.get("PORT", 5000))
 app.run(host="0.0.0.0", port=port)
